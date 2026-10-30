@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Tasca – i miei soldi</title>
+<meta name="theme-color" content="#DCD6F2">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="stylesheet" href="style.css">
+<script>try{var s=JSON.parse(localStorage.getItem('tasca.v1')),t=(s&&s.cfg&&s.cfg.theme)||'system';document.documentElement.dataset.theme=(t=='dark'||(t=='system'&&window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches))?'dark':'light'}catch(e){}</script>
+<script>window.addEventListener('error',function(e){var l=document.getElementById('loader');if(l)l.style.display='none';var v=document.getElementById('view');if(!v||v.textContent.indexOf('Caricamento')!==0)return;var t=e.target;v.innerHTML='<p style="padding:24px">'+(t&&t.src?'Impossibile caricare '+t.src.split('/').pop()+': controlla che il file sia nella stessa cartella.':'Errore: '+e.message+' ('+(e.filename||'').split('/').pop()+' riga '+e.lineno+')')+'</p>'},true)</script>
+<noscript><style>#loader{display:none}</style></noscript>
+</head>
+<body>
+<header id="bar">
+<button id="menu" aria-label="Apri il menù" aria-expanded="false" aria-controls="nav"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+<b class="brand">Tasca</b>
+<a id="avatar" href="#profile" aria-label="Profilo"></a>
+</header>
+<div id="edge" aria-hidden="true"></div>
+<div id="scrim"></div>
+<nav id="nav" aria-label="Menù principale"></nav>
+<main id="view"><p style="padding:24px">Caricamento… Se questo messaggio resta, JavaScript è disattivato o app.js non è stato caricato: controlla che tutti i file siano nella stessa cartella.</p></main>
+<dialog id="dlg"><form method="dialog" id="frm"></form></dialog>
+<div id="toast" role="status"></div>
+<div id="loader" class="on" role="status" aria-live="polite"><div class="lcard"><img src="loader.gif" alt=""><span id="lmsg">Caricamento…</span></div></div>
+<script src="app.js"></script>
+</body>
+</html>

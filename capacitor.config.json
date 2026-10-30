@@ -1,0 +1,6 @@
+{
+  "appId": "it.tasca.app",
+  "appName": "Tasca",
+  "webDir": "www",
+  "server": { "androidScheme": "https" }
+}

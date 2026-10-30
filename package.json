@@ -1,0 +1,35 @@
+{
+  "name": "tasca",
+  "version": "1.0.0",
+  "description": "Tasca – i miei soldi",
+  "author": "Tasca",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build:win": "electron-builder --win",
+    "android:prepare": "cap add android && capacitor-assets generate --android && cap sync android",
+    "build:apk": "cd android && gradlew assembleDebug"
+  },
+  "dependencies": {
+    "@capacitor/android": "^6.1.0",
+    "@capacitor/core": "^6.1.0"
+  },
+  "devDependencies": {
+    "@capacitor/assets": "^3.0.5",
+    "@capacitor/cli": "^6.1.0",
+    "electron": "^31.0.0",
+    "electron-builder": "^24.13.3"
+  },
+  "build": {
+    "appId": "it.tasca.app",
+    "productName": "Tasca",
+    "directories": { "output": "dist" },
+    "files": ["main.js", "www/**/*"],
+    "win": {
+      "icon": "build/icon.png",
+      "target": ["nsis", "portable"]
+    },
+    "nsis": { "oneClick": false, "allowToChangeInstallationDirectory": true },
+    "portable": { "artifactName": "Tasca-portatile.exe" }
+  }
+}
