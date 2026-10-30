@@ -1,0 +1,54 @@
+name: Crea EXE e APK
+on:
+  push:
+    branches: [main, master]
+  workflow_dispatch:
+
+jobs:
+  windows:
+    runs-on: windows-latest
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20 }
+      - name: Prepara le cartelle
+        run: |
+          mkdir -p www assets build
+          cp index.html style.css app.js sw.js manifest.json loader.gif icon-192.png icon-512.png icon-maskable-512.png apple-touch-icon.png www/
+          cp icon-only.png icon-foreground.png icon-background.png assets/
+          cp icon-512.png build/icon.png
+      - run: npm install
+      - run: npm run build:win
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Tasca-Windows
+          path: dist/*.exe
+
+  android:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20 }
+      - uses: actions/setup-java@v4
+        with: { distribution: temurin, java-version: 17 }
+      - name: Prepara le cartelle
+        run: |
+          mkdir -p www assets build
+          cp index.html style.css app.js sw.js manifest.json loader.gif icon-192.png icon-512.png icon-maskable-512.png apple-touch-icon.png www/
+          cp icon-only.png icon-foreground.png icon-background.png assets/
+          cp icon-512.png build/icon.png
+      - run: npm install
+      - run: npx cap add android
+      - run: npx capacitor-assets generate --android
+      - run: npx cap sync android
+      - run: chmod +x android/gradlew && cd android && ./gradlew assembleDebug
+      - run: mv android/app/build/outputs/apk/debug/app-debug.apk Tasca.apk
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Tasca-Android
+          path: Tasca.apk
+
